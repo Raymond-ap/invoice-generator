@@ -12,17 +12,23 @@ const Controls = ({ handleprint, handlepreview, showInvoice }) => {
         <button
           onClick={handlepreview}
           className={`
-            ${showInvoice ? "bg-red-500 hover:bg-red-600 hover:text-white" : "bg-white hover:bg-[#ccc]"}
+            ${
+              showInvoice
+                ? "bg-red-500 hover:bg-red-600 hover:text-white"
+                : "bg-white hover:bg-[#ccc]"
+            }
            capitalize w-full items-center justify-center text-black font-semibold py-2 px-4 rounded-md`}
         >
           {showInvoice ? "Edit" : "Preview"}
         </button>
-        <button
-          onClick={handleprint}
-          className="bg-white hover:bg-[#ccc] capitalize w-full items-center justify-center text-black font-semibold py-2 px-4 rounded-md"
-        >
-          download
-        </button>
+        {showInvoice && (
+          <button
+            onClick={handleprint}
+            className="bg-white hover:bg-[#ccc] capitalize w-full items-center justify-center text-black font-semibold py-2 px-4 rounded-md"
+          >
+            download
+          </button>
+        )}
       </div>
     </div>
   );
