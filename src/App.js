@@ -1,8 +1,11 @@
 import React from 'react'
+import Home from './view/Home'
 
 function App() {
   return (
-    <h1 className='text-blue-900'>App</h1>
+    <div className="bg-gray-100 ">
+    <Home />
+    </div>
   )
 }
 
