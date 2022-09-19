@@ -88,12 +88,39 @@ const FormWrapper = ({ setInvoice, invoice }) => {
 
       <div className="grid grid-cols-2 gap-4 my-2">
         <FormInput
+          label={"paid by"}
+          type={"text"}
+          placeholder={"paid by"}
+          value={invoice.paidBy}
+          onChange={(e) => setInvoice({ ...invoice, paidBy: e.target.value })}
+        />
+        <FormInput
+          label={"paid to"}
+          type={"text"}
+          placeholder={"paid to"}
+          value={invoice.paidTo}
+          onChange={(e) => setInvoice({ ...invoice, paidTo: e.target.value })}
+        />
+      </div>
+      <Line />
+
+      <div className="grid grid-cols-2 gap-4 my-2">
+        <FormInput
           label={"total amount"}
           type={"number"}
           placeholder={"0.00"}
           value={invoice.totalAmount}
           onChange={(e) =>
             setInvoice({ ...invoice, totalAmount: e.target.value })
+          }
+        />
+        <FormInput
+          label={"payment method"}
+          type={"text"}
+          placeholder={"0.00"}
+          value={invoice.paymentMethod}
+          onChange={(e) =>
+            setInvoice({ ...invoice, paymentMethod: e.target.value })
           }
         />
       </div>

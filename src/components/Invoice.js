@@ -1,11 +1,11 @@
 import React from "react";
+import logo from '../logo.png'
+
 const Invoice = ({ invoice }) => {
   return (
     <div className="py-3 px-5 bg-white rounded-md shadow-md transition delay-150">
       <div className="flex flex-row items-center justify-between">
-        <div className="capitalize flex items-center justify-center w-20 h-20 bg-pink-700 text-2xl text-white font-bold rounded-md">
-          <h1>Logo</h1>
-        </div>
+       <img src={logo} alt="" className="w-20 object-cover" />
         <div className="text-right">
           <h1 className="text-2xl font-bold">Invoice</h1>
           <p className="text-gray-500">Bill No: #{invoice.number}</p>
@@ -34,13 +34,19 @@ const Invoice = ({ invoice }) => {
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="py-3 px-6">
-                  bill name
+                Proposal type
                 </th>
                 <th scope="col" class="py-3 px-6">
-                  type
+                amount
                 </th>
                 <th scope="col" class="py-3 px-6">
-                  amount
+                Paid by
+                </th>
+                <th scope="col" class="py-3 px-6">
+                paid to
+                </th>
+                <th scope="col" class="py-3 px-6">
+                payment method
                 </th>
               </tr>
             </thead>
@@ -50,10 +56,12 @@ const Invoice = ({ invoice }) => {
                   scope="row"
                   class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {invoice.billName}
+                  {invoice.billType}
                 </th>
-                <td class="py-4 px-6">{invoice.billType}</td>
                 <td class="py-4 px-6">{invoice.totalAmount}</td>
+                <td class="py-4 px-6">{invoice.paidTo}</td>
+                <td class="py-4 px-6">{invoice.paidBy}</td>
+                <td class="py-4 px-6">{invoice.paymentMethod}</td>
               </tr>
             </tbody>
           </table>
