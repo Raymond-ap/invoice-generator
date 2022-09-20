@@ -1,7 +1,11 @@
 import React from "react";
 import { Controls, Invoice, InvoiceForm } from "../components";
 import ReactToPrint from "react-to-print";
-import { FiSend } from "react-icons/fi";
+import {
+  AiOutlineArrowLeft,
+  AiOutlineCloudDownload,
+  AiOutlineSave,
+} from "react-icons/ai";
 
 const Home = () => {
   const [showInvoice, setShowInvoice] = React.useState(false);
@@ -29,23 +33,29 @@ const Home = () => {
                   className={`items-center justify-center mx-auto max-w-3xl`}
                 >
                   <div className="my-3">
-                    <div className="w-full">
-                      <div className="mt-4 flex flex-row gap-4 items-center">
+                    <div className="w-full flex flex-row items-center justify-between">
+                      <button
+                        className={``}
+                        onClick={() => setShowInvoice(false)}
+                      >
+                        <AiOutlineArrowLeft size={25} />
+                      </button>
+                      <div className="mt-4 flex flex-row gap-4 items-center justify-end">
                         <button
-                          onClick={() => setShowInvoice(false)}
-                          className={`bg-red-500 hover:bg-red-600 hover:text-white
-           capitalize w-full items-center justify-center text-black font-semibold py-2 px-4 rounded-md`}
+                          className={`bg-red-500 text-white hover:bg-red-600 hover:text-white capitalize w-full  justify-center flex flex-row items-center gap-1  font-semibold py-2 px-4 rounded-md`}
                         >
-                          {"back"}
+                          <AiOutlineSave size={20} />
+                          save
                         </button>
                         {showInvoice && (
                           <ReactToPrint
                             trigger={() => (
                               <button
                                 onClick={handleprint}
-                                className="bg-blue-800 text-white hover:bg-blue-500 capitalize w-full items-center justify-center font-semibold py-2 px-4 rounded-md"
+                                className="bg-blue-800 text-white flex flex-row gap-1 hover:bg-blue-500 capitalize w-full items-center justify-center font-semibold py-2 px-4 rounded-md"
                               >
-                                download / save
+                                <AiOutlineCloudDownload size={20} />
+                                download
                               </button>
                             )}
                             content={() => componentRef.current}
