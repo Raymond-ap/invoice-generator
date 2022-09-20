@@ -3,7 +3,7 @@ import Home from './view/Home'
 
 function App() {
   return (
-    <div className="bg-gray-100 ">
+    <div className="">
     <Home />
     </div>
   )

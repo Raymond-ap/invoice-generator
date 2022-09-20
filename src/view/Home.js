@@ -5,27 +5,14 @@ import { FiSend } from "react-icons/fi";
 
 const Home = () => {
   const [showInvoice, setShowInvoice] = React.useState(false);
-  const [invoice, setInvoice] = React.useState({
-    billDate: "",
-    dueDate: "",
-    number: "",
-    clientAddress: "",
-    clientName: "",
-    clientEmail: "",
-    senderEmail: "",
-    notes: "",
-    billName: "",
-    billType: "",
-    totalAmount: "",
-    paymentMethod: "",
-    paidBy: "",
-    paidTo: "",
-  });
+  const [invoice, setInvoice] = React.useState([]);
+
   const handleprint = () => {
     window.print();
   };
 
-  const handlepreview = () => {
+  const handlepreview = (row) => {
+    setInvoice(row);
     setShowInvoice(!showInvoice);
   };
 
@@ -34,50 +21,47 @@ const Home = () => {
   return (
     <>
       <main className="w-full items-center lg:p-10 px-3 py-3">
-        <div className="grid lg:grid-cols-4 gap-4">
-          <div className="lg:col-span-3">
+        <div>
+          <div>
             {showInvoice ? (
-              <div ref={componentRef}>
-                <Invoice invoice={invoice} />
-              </div>
-            ) : (
-              <InvoiceForm setInvoice={setInvoice} invoice={invoice} />
-            )}
-          </div>
-          <div className="col-span-1 ">
-            <div className="w-full">
-              <button className="bg-blue-800  shadow-lg capitalize w-full items-center justify-center flex flex-row hover:bg-blue-900 text-white font-semibold py-2 px-4 rounded-md">
-                <FiSend size={18} />
-                <span className="ml-3">Send invoice</span>
-              </button>
-              <div className="mt-4 flex flex-row gap-4 items-center">
-                <button
-                  onClick={handlepreview}
-                  className={`
-            ${
-              showInvoice
-                ? "bg-red-500 hover:bg-red-600 hover:text-white"
-                : "bg-white hover:bg-[#ccc]"
-            }
-           capitalize w-full items-center justify-center text-black font-semibold py-2 px-4 rounded-md`}
+              <>
+                <div
+                  className={`items-center justify-center mx-auto max-w-3xl`}
                 >
-                  {showInvoice ? "Edit" : "Preview"}
-                </button>
-                {showInvoice && (
-                  <ReactToPrint
-                    trigger={() => (
-                      <button
-                        onClick={handleprint}
-                        className="bg-white hover:bg-[#ccc] capitalize w-full items-center justify-center text-black font-semibold py-2 px-4 rounded-md"
-                      >
-                        download
-                      </button>
-                    )}
-                    content={() => componentRef.current}
-                  />
-                )}
-              </div>
-            </div>
+                  <div className="my-3">
+                    <div className="w-full">
+                      <div className="mt-4 flex flex-row gap-4 items-center">
+                        <button
+                          onClick={() => setShowInvoice(false)}
+                          className={`bg-red-500 hover:bg-red-600 hover:text-white
+           capitalize w-full items-center justify-center text-black font-semibold py-2 px-4 rounded-md`}
+                        >
+                          {"back"}
+                        </button>
+                        {showInvoice && (
+                          <ReactToPrint
+                            trigger={() => (
+                              <button
+                                onClick={handleprint}
+                                className="bg-blue-800 text-white hover:bg-blue-500 capitalize w-full items-center justify-center font-semibold py-2 px-4 rounded-md"
+                              >
+                                download / save
+                              </button>
+                            )}
+                            content={() => componentRef.current}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div ref={componentRef}>
+                    <Invoice invoice={invoice} />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <InvoiceForm handlepreview={handlepreview} />
+            )}
           </div>
         </div>
       </main>
